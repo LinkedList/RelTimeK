@@ -5,9 +5,10 @@ import java.time.Duration
 class EsHumanizeFnc: HumanizeFnc {
 
     private val relTime = mapOf(
-            RelativeTime.mm to "un minuto"
+            RelativeTime.MINUTES.single to "un minuto",
+            RelativeTime.MINUTES.double to "%d minutos"
     )
-    override fun map(): Map<RelativeTime, String> {
+    override fun map(): Map<String, String> {
         return relTime
     }
 

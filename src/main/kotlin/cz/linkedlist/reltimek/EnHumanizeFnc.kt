@@ -6,24 +6,16 @@ import java.time.Duration
 class EnHumanizeFnc: HumanizeFnc {
 
     private val relTime = mapOf(
-            RelativeTime.s to "a few seconds",
-            RelativeTime.mm to "a minute"
+            RelativeTime.SECONDS.single to "a few seconds",
+            RelativeTime.SECONDS.double to "%d seconds",
+            RelativeTime.MINUTES.single to "a minute",
+            RelativeTime.MINUTES.double to "%d minutes"
     )
-    override fun map(): Map<RelativeTime, String> {
+    override fun map(): Map<String, String> {
         return relTime
     }
 
     override fun humanize(d: Duration): String {
-        val dur = d.abs()
-        val seconds = dur.seconds
-        val minutes = dur.toMinutes()
-
-        val a = if(minutes > 0 && minutes <= Thresholds.m.default) {
-            listOf(RelativeTime.mm, minutes)
-        } else {
-            listOf(RelativeTime.s, seconds)
-        }
-
-        return relTime[a[0]]!!
+        return ""
     }
 }

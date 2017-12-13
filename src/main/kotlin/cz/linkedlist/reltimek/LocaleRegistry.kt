@@ -26,6 +26,6 @@ class LocaleRegistry {
 interface HumanizeFnc {
 
     fun humanize(d: Duration): String
-    fun map(): Map<RelativeTime, String>
+    fun map(): Map<String, String>
 
 }
