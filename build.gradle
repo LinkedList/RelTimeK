@@ -1,0 +1,43 @@
+buildscript {
+    ext.kotlin_version = '1.2.0'
+    ext.junit_jupiter_version = '5.0.1'
+    ext.hamcrest_version = '1.3'
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.1'
+    }
+}
+
+group 'cz.linkedlist'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'kotlin'
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    testCompile(
+            "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version",
+            "org.hamcrest:hamcrest-core:$hamcrest_version",
+            'org.apiguardian:apiguardian-api:1.0.0'
+    )
+    testRuntime(
+            "org.junit.jupiter:junit-jupiter-engine:$junit_jupiter_version"
+    )
+}
+
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
