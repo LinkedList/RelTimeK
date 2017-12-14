@@ -12,11 +12,20 @@ interface SimpleFnc: HumanizeFnc {
     val map: Map<String, String>
 
     fun humanize(payload: Payload): String {
-        return if(payload.double) {
+        val simpleHumanized =  if(payload.double) {
             val str = this.map[payload.relTime.double]!!
             str.replace("%d", payload.num.toString(), true)
         } else {
             this.map[payload.relTime.single]!!
+        }
+
+        val withSuffix = !payload.withoutSuffix
+        val isFuture = payload.isFuture
+
+        return when {
+            withSuffix && isFuture -> this.future.replace("%s", simpleHumanized)
+            withSuffix && !isFuture -> this.past.replace("%s", simpleHumanized)
+            else -> simpleHumanized
         }
     }
 }

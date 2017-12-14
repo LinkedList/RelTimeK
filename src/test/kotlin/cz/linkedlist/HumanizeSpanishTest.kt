@@ -4,6 +4,7 @@ import cz.linkedlist.reltimek.humanize
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.Duration
@@ -14,8 +15,6 @@ import java.time.temporal.ChronoUnit
 import java.util.*
 
 class HumanizeSpanishTest {
-
-  val SPANISH: Locale = Locale.forLanguageTag("es")
 
     @BeforeEach
     fun setUp() {
@@ -42,12 +41,28 @@ class HumanizeSpanishTest {
         "YEARS, 1, un año",
         "YEARS, 4, 4 años"
     ])
-    fun testEnglish(unit: ChronoUnit, value: Long, result: String) {
+    fun testSpanish(unit: ChronoUnit, value: Long, result: String) {
         val time = LocalTime.of(12, 30, 30)
         val date = LocalDate.of(2017, 5, 13)
         val dateTime = LocalDateTime.of(date, time)
         val before = dateTime.minus(value, unit)
 
         assertThat(Duration.between(dateTime, before).humanize(), equalTo(result))
+    }
+
+    @Test
+    fun testFuture() {
+        val now = LocalDateTime.now()
+        val before = now.plusMinutes(5)
+
+        assertThat(Duration.between(now, before).humanize(true), equalTo("en 5 minutos"))
+    }
+
+    @Test
+    fun testPast() {
+        val now = LocalDateTime.now()
+        val before = now.minusMinutes(5)
+
+        assertThat(Duration.between(now, before).humanize(true), equalTo("hace 5 minutos"))
     }
 }

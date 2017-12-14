@@ -4,6 +4,7 @@ import cz.linkedlist.reltimek.humanize
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.core.IsEqual.equalTo
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.Duration
@@ -50,6 +51,22 @@ class HumanizeEnglishTest {
         val before = dateTime.minus(value, unit)
 
         assertThat(Duration.between(dateTime, before).humanize(), equalTo(result))
+    }
+
+    @Test
+    fun testFuture() {
+        val now = LocalDateTime.now()
+        val before = now.plusMinutes(5)
+
+        assertThat(Duration.between(now, before).humanize(true), equalTo("in 5 minutes"))
+    }
+
+    @Test
+    fun testPast() {
+        val now = LocalDateTime.now()
+        val before = now.minusMinutes(5)
+
+        assertThat(Duration.between(now, before).humanize(true), equalTo("5 minutes ago"))
     }
 
 }
