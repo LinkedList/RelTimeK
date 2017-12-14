@@ -1,6 +1,5 @@
 package cz.linkedlist.reltimek
 
-import java.time.Duration
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -23,9 +22,3 @@ class LocaleRegistry {
 
 }
 
-interface HumanizeFnc {
-
-    fun humanize(d: Duration): String
-    fun map(): Map<String, String>
-
-}

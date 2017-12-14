@@ -46,33 +46,37 @@ fun Duration.humanize(locale: Locale): String {
 
     val (num, relTime) = arrayOf(years, months, days, hours, minutes, seconds).first { it.first != 0L }
 
-    val a = if(relTime == RelativeTime.SECONDS)
+    val payload = if(relTime == RelativeTime.SECONDS)
         determineSeconds(num)
     else
         determineOther(num, relTime)
 
     val humanizeFnc = registry.getForLocale(locale)
 
-    return if(a.size > 1) {
-        val str = humanizeFnc.map()[a[0]]!!
-        str.replace("%d", a[1].toString(), true)
-    } else {
-        humanizeFnc.map()[a[0]]!!
+    return when(humanizeFnc) {
+        is SimpleFnc -> {
+            humanizeFnc.humanize(payload)
+        }
+        else -> TODO()
     }
 }
 
-fun determineSeconds(num: Long): List<Any> {
+class SimplePayload(val relTime: RelativeTime, val num: Long?, val double: Boolean = false) {
+    constructor(relTime: RelativeTime) : this(relTime, null)
+}
+
+fun determineSeconds(num: Long): SimplePayload{
     return when {
-        num < Thresholds.ss.default -> listOf(RelativeTime.SECONDS.single)
-        num < Thresholds.s.default -> listOf(RelativeTime.SECONDS.double, num)
-        else -> listOf(RelativeTime.MINUTES.single)
+        num < Thresholds.ss.default -> SimplePayload(RelativeTime.SECONDS)
+        num < Thresholds.s.default -> SimplePayload(RelativeTime.SECONDS, num, true)
+        else -> SimplePayload(RelativeTime.MINUTES)
     }
 }
 
-fun determineOther(num: Long, relTime: RelativeTime): List<Any> {
+fun determineOther(num: Long, relTime: RelativeTime): SimplePayload {
     return when {
-        num == 1L -> listOf(relTime.single)
-        num < Thresholds.valueOf(relTime.single).default -> listOf(relTime.double, num)
-        else -> listOf(RelativeTime.values()[relTime.ordinal + 1].single)
+        num == 1L -> SimplePayload(relTime)
+        num < Thresholds.valueOf(relTime.single).default -> SimplePayload(relTime, num, true)
+        else -> SimplePayload(RelativeTime.values()[relTime.ordinal + 1])
     }
 }
