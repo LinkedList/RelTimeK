@@ -26,6 +26,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     testCompile(
             "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version",
+            "org.junit.jupiter:junit-jupiter-params:$junit_jupiter_version",
             "org.hamcrest:hamcrest-core:$hamcrest_version",
             'org.apiguardian:apiguardian-api:1.0.0'
     )
