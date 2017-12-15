@@ -3,6 +3,7 @@ package cz.linkedlist.reltimek.functions
 import cz.linkedlist.reltimek.RelativeTime
 import cz.linkedlist.reltimek.SimpleFnc
 
+@RegisterFnc("es")
 class EsHumanizeFnc: SimpleFnc {
     override val future = "en %s"
     override val past = "hace %s"

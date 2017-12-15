@@ -6,6 +6,7 @@ buildscript {
 
     repositories {
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
@@ -25,6 +26,7 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    compile "io.github.lukehutch:fast-classpath-scanner:2.9.3"
     testCompile(
             "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version",
             "org.junit.jupiter:junit-jupiter-params:$junit_jupiter_version",

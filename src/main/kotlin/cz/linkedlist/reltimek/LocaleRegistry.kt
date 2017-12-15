@@ -2,7 +2,8 @@ package cz.linkedlist.reltimek
 
 import cz.linkedlist.reltimek.functions.CsHumanizeFnc
 import cz.linkedlist.reltimek.functions.EnHumanizeFnc
-import cz.linkedlist.reltimek.functions.EsHumanizeFnc
+import cz.linkedlist.reltimek.functions.RegisterFnc
+import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -12,15 +13,19 @@ class LocaleRegistry {
 
     init {
         val tempRegistry = mutableMapOf<Locale, HumanizeFnc>()
-        tempRegistry[Locale.forLanguageTag("cs_CZ")] = CsHumanizeFnc()
-        tempRegistry[Locale.forLanguageTag("es")] = EsHumanizeFnc()
-        tempRegistry[Locale.US] = EnHumanizeFnc()
+        FastClasspathScanner(CsHumanizeFnc::class.java.`package`.name)
+                .matchClassesWithAnnotation(RegisterFnc::class.java, {
+                    val annot = it.getDeclaredAnnotation(RegisterFnc::class.java)
+                    tempRegistry[Locale.forLanguageTag(annot.language)] = it.newInstance() as HumanizeFnc
+                })
+                .disableRecursiveScanning()
+                .scan()
 
         localeRegistry = HashMap(tempRegistry)
     }
 
     fun getForLocale(locale: Locale): HumanizeFnc {
-        return localeRegistry.getOrDefault(locale, EnHumanizeFnc())
+        return localeRegistry.getOrDefault(Locale.forLanguageTag(locale.language), EnHumanizeFnc())
     }
 
 }

@@ -4,6 +4,7 @@ import cz.linkedlist.reltimek.ComplexFnc
 import cz.linkedlist.reltimek.Payload
 import cz.linkedlist.reltimek.RelativeTime
 
+@RegisterFnc("cs")
 class CsHumanizeFnc : ComplexFnc {
 
     override val future = "za %s"

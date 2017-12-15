@@ -21,7 +21,7 @@ class HumanizeCzechTest {
 
     @BeforeEach
     fun setUp() {
-        Locale.setDefault(Locale.forLanguageTag("cs_CZ"))
+        Locale.setDefault(Locale.forLanguageTag("cs-CZ"))
     }
 
     @ParameterizedTest(name = "{index} => minus {1} {0} = {2}")

@@ -4,6 +4,7 @@ import cz.linkedlist.reltimek.RelativeTime
 import cz.linkedlist.reltimek.SimpleFnc
 
 
+@RegisterFnc("en")
 class EnHumanizeFnc: SimpleFnc {
     override val future = "in %s"
     override val past = "%s ago"
