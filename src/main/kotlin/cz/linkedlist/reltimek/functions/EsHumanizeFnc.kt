@@ -1,4 +1,7 @@
-package cz.linkedlist.reltimek
+package cz.linkedlist.reltimek.functions
+
+import cz.linkedlist.reltimek.RelativeTime
+import cz.linkedlist.reltimek.SimpleFnc
 
 class EsHumanizeFnc: SimpleFnc {
     override val future = "en %s"

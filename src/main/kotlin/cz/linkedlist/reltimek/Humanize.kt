@@ -61,12 +61,7 @@ fun Duration.humanize(locale: Locale, withSuffix: Boolean): String {
 
     val humanizeFnc = registry.getForLocale(locale)
 
-    return when(humanizeFnc) {
-        is SimpleFnc -> {
-            humanizeFnc.humanize(finalPayload)
-        }
-        else -> TODO()
-    }
+    return humanizeFnc.humanize(finalPayload)
 }
 
 

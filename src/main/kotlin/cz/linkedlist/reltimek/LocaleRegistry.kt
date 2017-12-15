@@ -1,5 +1,8 @@
 package cz.linkedlist.reltimek
 
+import cz.linkedlist.reltimek.functions.CsHumanizeFnc
+import cz.linkedlist.reltimek.functions.EnHumanizeFnc
+import cz.linkedlist.reltimek.functions.EsHumanizeFnc
 import java.util.*
 import kotlin.collections.HashMap
 

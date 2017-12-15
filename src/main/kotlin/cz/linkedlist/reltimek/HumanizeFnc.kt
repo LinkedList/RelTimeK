@@ -6,12 +6,14 @@ package cz.linkedlist.reltimek
 interface HumanizeFnc {
     val future: String
     val past: String
+
+    fun humanize(payload: Payload): String
 }
 
 interface SimpleFnc: HumanizeFnc {
     val map: Map<String, String>
 
-    fun humanize(payload: Payload): String {
+    override fun humanize(payload: Payload): String {
         val simpleHumanized =  if(payload.double) {
             val str = this.map[payload.relTime.double]!!
             str.replace("%d", payload.num.toString(), true)
@@ -30,6 +32,20 @@ interface SimpleFnc: HumanizeFnc {
     }
 }
 interface ComplexFnc: HumanizeFnc {
-    fun humanize(): String
+    fun processPayload(payload: Payload): String
+
+    override fun humanize(payload: Payload): String {
+        val processed = processPayload(payload)
+
+        val withSuffix = !payload.withoutSuffix
+        val isFuture = payload.isFuture
+
+        return when {
+            withSuffix && isFuture -> this.future.replace("%s", processed)
+            withSuffix && !isFuture -> this.past.replace("%s", processed)
+            else -> processed
+        }
+    }
 }
+
 
