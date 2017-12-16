@@ -8,6 +8,14 @@ interface HumanizeFnc {
     val past: String
 
     fun humanize(payload: Payload): String
+
+    fun simplePrefixSuffix(withSuffix: Boolean, isFuture: Boolean, humanized: String): String {
+        return when {
+            withSuffix && isFuture -> this.future.replace("%s", humanized)
+            withSuffix && !isFuture -> this.past.replace("%s", humanized)
+            else -> humanized
+        }
+    }
 }
 
 interface SimpleFnc: HumanizeFnc {
@@ -24,12 +32,9 @@ interface SimpleFnc: HumanizeFnc {
         val withSuffix = !payload.withoutSuffix
         val isFuture = payload.isFuture
 
-        return when {
-            withSuffix && isFuture -> this.future.replace("%s", simpleHumanized)
-            withSuffix && !isFuture -> this.past.replace("%s", simpleHumanized)
-            else -> simpleHumanized
-        }
+        return simplePrefixSuffix(withSuffix, isFuture, simpleHumanized)
     }
+
 }
 interface ComplexFnc: HumanizeFnc {
     fun processPayload(payload: Payload): String
@@ -40,11 +45,7 @@ interface ComplexFnc: HumanizeFnc {
         val withSuffix = !payload.withoutSuffix
         val isFuture = payload.isFuture
 
-        return when {
-            withSuffix && isFuture -> this.future.replace("%s", processed)
-            withSuffix && !isFuture -> this.past.replace("%s", processed)
-            else -> processed
-        }
+        return simplePrefixSuffix(withSuffix, isFuture, processed)
     }
 }
 
