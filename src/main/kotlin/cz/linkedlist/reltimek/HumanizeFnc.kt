@@ -4,16 +4,19 @@ package cz.linkedlist.reltimek
  * @author Martin Macko <https://github.com/LinkedList>.
  */
 interface HumanizeFnc {
-    val future: String
-    val past: String
+    val future: String?
+    val past: String?
 
     fun humanize(payload: Payload): String
 
-    fun simplePrefixSuffix(withSuffix: Boolean, isFuture: Boolean, humanized: String): String {
-        return when {
-            withSuffix && isFuture -> this.future.replace("%s", humanized)
-            withSuffix && !isFuture -> this.past.replace("%s", humanized)
-            else -> humanized
+    fun simplePrefixSuffix(isFuture: Boolean, humanized: String): String {
+        if(future == null || past == null)
+            throw IllegalStateException("[future] and [past] property cannot be null if you want to use simplePrefixSuffix")
+        else {
+            return when {
+                isFuture -> this.future!!.replace("%s", humanized)
+                else -> this.past!!.replace("%s", humanized)
+            }
         }
     }
 }
@@ -32,11 +35,23 @@ interface SimpleFnc: HumanizeFnc {
         val withSuffix = !payload.withoutSuffix
         val isFuture = payload.isFuture
 
-        return simplePrefixSuffix(withSuffix, isFuture, simpleHumanized)
+        return if(withSuffix) {
+            simplePrefixSuffix(isFuture, simpleHumanized)
+        } else {
+            simpleHumanized
+        }
     }
 
 }
 interface ComplexFnc: HumanizeFnc {
+
+    fun future(processed: String, payload: Payload):String {
+        return simplePrefixSuffix(true, processed)
+    }
+    fun past(processed: String, payload: Payload): String {
+        return simplePrefixSuffix(false, processed)
+    }
+
     fun processPayload(payload: Payload): String
 
     override fun humanize(payload: Payload): String {
@@ -45,7 +60,14 @@ interface ComplexFnc: HumanizeFnc {
         val withSuffix = !payload.withoutSuffix
         val isFuture = payload.isFuture
 
-        return simplePrefixSuffix(withSuffix, isFuture, processed)
+        return if(withSuffix) {
+            when {
+                isFuture -> future(processed, payload)
+                else -> past(processed, payload)
+            }
+        } else {
+            processed
+        }
     }
 }
 
