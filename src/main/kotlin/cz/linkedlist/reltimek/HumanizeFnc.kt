@@ -43,6 +43,9 @@ interface SimpleFnc: HumanizeFnc {
     }
 
 }
+
+class SimpleFncImpl(override val future: String?, override val past: String?, override val map: Map<String, String>): SimpleFnc
+
 interface ComplexFnc: HumanizeFnc {
 
     fun future(processed: String, payload: Payload):String {
