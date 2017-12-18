@@ -24,7 +24,7 @@ class HumanizeSpanishTest {
     @ParameterizedTest(name = "{index} => minus {1} {0} = {2}")
     @CsvSource(value = [
         "SECONDS, 3, pocos segundos",
-        "SECONDS, 45, 45 sequndos",
+        "SECONDS, 45, 45 segundos",
         "SECONDS, 48, un minuto",
         "MINUTES, 1, un minuto",
         "MINUTES, 3, 3 minutos",
