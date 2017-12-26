@@ -56,7 +56,11 @@ tet,iha %s,%s liuba,minutu balun,minutu %d,minutu ida,minutus %d,horas ida,horas
 th,อีก %s,%sที่แล้ว,ไม่กี่วินาที,%d วินาที,1 นาที,%d นาที,1 ชั่วโมง,%d ชั่วโมง,1 วัน,%d วัน,1 เดือน,%d เดือน,1 ปี,%d ปี
 tl,sa loob ng %s,%s ang nakalipas,ilang segundo,%d segundo,isang minuto,%d minuto,isang oras,%d oras,isang araw,%d araw,isang buwan,%d buwan,isang taon,%d taon
 tr,%s sonra,%s önce,birkaç saniye,%d saniye,bir dakika,%d dakika,bir saat,%d saat,bir gün,%d gün,bir ay,%d ay,bir yıl,%d yıl
+tzm,ⴷⴰⴷⵅ ⵙ ⵢⴰⵏ %s,ⵢⴰⵏ %s,ⵉⵎⵉⴽ,%d ⵉⵎⵉⴽ,ⵎⵉⵏⵓⴺ,%d ⵎⵉⵏⵓⴺ,ⵙⴰⵄⴰ,%d ⵜⴰⵙⵙⴰⵄⵉⵏ,ⴰⵙⵙ,%d oⵙⵙⴰⵏ,ⴰⵢoⵓⵔ,%d ⵉⵢⵢⵉⵔⵏ,ⴰⵙⴳⴰⵙ,%d ⵉⵙⴳⴰⵙⵏ
+tzm-latn,dadkh s yan %s,yan %s,imik,%d imik,minuḍ,%d minuḍ,saɛa,%d tassaɛin,ass,%d ossan,ayowr,%d iyyirn,asgas,%d isgasn
 ur,%s بعد,%s قبل,چند سیکنڈ,%d سیکنڈ,ایک منٹ,%d منٹ,ایک گھنٹہ,%d گھنٹے,ایک دن,%d دن,ایک ماہ,%d ماہ,ایک سال,%d سال
+uz,Якин %s ичида,Бир неча %s олдин,фурсат,%d фурсат,бир дакика,%d дакика,бир соат,%d соат,бир кун,%d кун,бир ой,%d ой,бир йил,%d йил
+uz-latn,Yaqin %s ichida,Bir necha %s oldin,soniya,%d soniya,bir daqiqa,%d daqiqa,bir soat,%d soat,bir kun,%d kun,bir oy,%d oy,bir yil,%d yil
 vi,%s tới,%s trước,vài giây,%d giây,một phút,%d phút,một giờ,%d giờ,một ngày,%d ngày,một tháng,%d tháng,một năm,%d năm
 yo,ní %s,%s kọjá,ìsẹjú aayá die,aayá %d,ìsẹjú kan,ìsẹjú %d,wákati kan,wákati %d,ọjọ́ kan,ọjọ́ %d,osù kan,osù %d,ọdún kan,ọdún %d
 zh,%s內,%s前,幾秒,%d 秒,1 分鐘,%d 分鐘,1 小時,%d 小時,1 天,%d 天,1 個月,%d 個月,1 年,%d 年

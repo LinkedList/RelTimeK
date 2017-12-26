@@ -5,7 +5,6 @@ import cz.linkedlist.reltimek.functions.EnHumanizeFnc
 import cz.linkedlist.reltimek.functions.RegisterFnc
 import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner
 import java.io.File
-import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -34,7 +33,11 @@ class LocaleRegistry {
     }
 
     fun getForLocale(locale: Locale): HumanizeFnc {
-        return localeRegistry.getOrDefault(Locale.forLanguageTag(locale.language), EnHumanizeFnc())
+        return if(locale.script.isEmpty()) {
+            localeRegistry.getOrDefault(Locale.forLanguageTag(locale.language), EnHumanizeFnc())
+        } else {
+            localeRegistry.getOrDefault(locale, EnHumanizeFnc())
+        }
     }
 
     private fun lineToInstance(line: String): Pair<String, SimpleFncImpl> {
